@@ -56,6 +56,20 @@
   :focus-visible{outline:3px solid var(--fire);outline-offset:3px}
   .hl{color:var(--fire)}
 
+
+  /* ---------- vinheta em vídeo ---------- */
+
+  .vinheta-btn{position:absolute;left:-2%;bottom:6%;z-index:3;display:flex;align-items:center;gap:10px;background:var(--fire);color:var(--white);border:0;border-radius:999px;padding:8px 16px 8px 8px;font:700 13px/1 var(--body);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;box-shadow:0 14px 30px -12px rgba(0,0,0,.6);transform:rotate(-4deg);transition:transform .3s var(--ease)}
+  .vinheta-btn:hover{transform:rotate(0) scale(1.05)}
+  .vinheta-btn video{width:58px;height:44px;border-radius:999px;object-fit:cover;background:#1d1a1d}
+  .vmodal{position:fixed;inset:0;z-index:160;background:rgba(12,10,10,.92);display:grid;place-items:center;padding:var(--gutter);opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s}
+  .vmodal.on{opacity:1;visibility:visible;transition:opacity .3s}
+  .vmodal video{width:min(100%,1000px);max-height:80vh;border-radius:14px;box-shadow:0 40px 80px -30px #000;background:#000}
+  .vmodal button{position:absolute;top:calc(16px + env(safe-area-inset-top,0px));right:calc(var(--gutter) + env(safe-area-inset-right,0px));background:none;border:1.5px solid rgba(255,255,255,.4);color:#fff;border-radius:999px;padding:10px 16px;font:700 13px/1 var(--body);cursor:pointer}
+
+  .svc-preview video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .25s}
+
+
   /* ---------- LOADER ---------- */
   .loader{position:fixed;inset:0;z-index:200;background:var(--fire);color:var(--white);display:grid;place-items:center;animation:loaderFallback .01s 4.5s forwards}
   @keyframes loaderFallback{to{visibility:hidden;opacity:0}}
@@ -64,13 +78,11 @@
   .loader::after{content:"";position:absolute;left:0;right:0;top:100%;height:70px;background:inherit;
     -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 70' preserveAspectRatio='none'%3E%3Cpath d='M0 0h1440v20c-60 0-70 40-140 40s-80-30-150-30-60 22-120 22-90-34-170-34-80 26-150 26-70-18-130-18-90 28-160 28S340 20 270 20 200 44 140 44 60 20 0 20z'/%3E%3C/svg%3E") center/100% 100%;
             mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 70' preserveAspectRatio='none'%3E%3Cpath d='M0 0h1440v20c-60 0-70 40-140 40s-80-30-150-30-60 22-120 22-90-34-170-34-80 26-150 26-70-18-130-18-90 28-160 28S340 20 270 20 200 44 140 44 60 20 0 20z'/%3E%3C/svg%3E") center/100% 100%}
-  .loader-in{display:grid;justify-items:center;gap:18px;text-align:center;padding-inline:16px}
-  .loader-logo{width:clamp(150px,22vw,240px);opacity:.25;position:relative}
-  .loader-logo .lit{position:absolute;inset:0;width:100%;opacity:1;clip-path:inset(calc(100% - var(--heat,0) * 100%) 0 0 0)}
-  .loader-count{font-family:var(--display);font-size:clamp(56px,10vw,120px);line-height:.9;font-variant-numeric:tabular-nums}
-  .loader-count sup{font-size:.35em;vertical-align:top;margin-left:4px}
+  .loader canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .loader-logo{width:clamp(140px,20vw,230px);position:relative}
+  .js .loader-logo{visibility:hidden}
   .loader-skip{position:absolute;right:calc(var(--gutter) + env(safe-area-inset-right,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));background:none;border:1.5px solid rgba(255,255,255,.7);color:var(--white);border-radius:999px;padding:8px 16px;font:700 12px/1 var(--body);letter-spacing:1.5px;text-transform:uppercase;cursor:pointer}
-  .loader-skip:hover{background:var(--white);color:var(--fire)}
+  .loader-skip{z-index:2}.loader-skip:hover{background:var(--white);color:var(--fire)}
 
   /* ---------- CURSOR ---------- */
   /* bolha de vidro: só aparece sobre itens clicáveis especiais; o cursor do sistema continua normal */
@@ -400,7 +412,13 @@
   /* ---------- FOOTER ---------- */
   footer{padding:34px var(--gutter);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:14px;color:var(--muted);border-top:1px solid var(--line)}
   footer a:hover{color:var(--fire)}
-  footer nav{display:flex;gap:22px}
+  footer nav{display:flex;gap:22px;align-items:center}
+  .fogo-topo{display:inline-flex;align-items:center;gap:10px}
+  .fogo-mini{position:relative;width:34px;aspect-ratio:640/829;display:block;transition:transform .35s var(--ease)}
+  .fogo-mini img{position:absolute;inset:0;width:100%;height:100%}
+  .fogo-mini .dim{opacity:.15;filter:grayscale(1) brightness(2)}
+  .fogo-mini .lit{clip-path:inset(calc(100% - var(--sp,0) * 100%) 0 0 0)}
+  .fogo-topo:hover .fogo-mini{transform:translateY(-4px) rotate(-6deg) scale(1.12)}
 
   .js .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s, transform .8s var(--ease)}
   .js .reveal.in{opacity:1;transform:none}
@@ -417,12 +435,11 @@
 <body>
 <script>document.documentElement.classList.add('js')</script>
 
+<div class="vmodal" id="vmodal" role="dialog" aria-modal="true" aria-label="Vinheta Kaiky Concept."><button type="button" id="vmodalX">Fechar ✕</button><video id="vmodalVid" controls playsinline preload="none" poster="video/intro-poster.jpg"><source src="video/intro.webm" type="video/webm"><source src="video/intro.mp4" type="video/mp4"></video></div>
 <!-- LOADER -->
 <div class="loader" id="loader" aria-hidden="true">
-  <div class="loader-in">
-    <div class="loader-logo"><img src="img/logo-white.png" alt=""><img class="lit" src="img/logo-white.png" alt=""></div>
-    <div class="loader-count"><span id="count">000</span><sup>%</sup></div>
-  </div>
+  <canvas id="fogoCv"></canvas>
+  <img class="loader-logo" id="fogoLogo" src="img/logo-branco.svg" alt="">
   <button class="loader-skip" id="skip" type="button">Pular</button>
 </div>
 
@@ -634,6 +651,7 @@
         </div>
       <div class="spin" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="c" d="M100,100 m-70,0 a70,70 0 1,1 140,0 a70,70 0 1,1 -140,0"/></defs><text font-family="Space Grotesk, sans-serif" font-weight="700" font-size="17" fill="#F6F1EA"><textPath href="#c" textLength="436" lengthAdjust="spacing">KAIKY CONCEPT ✦ DESIGN ✦ VÍDEO ✦ ARTE ✦</textPath></text></svg></div>
       <span class="sticker">desde <em>2024</em></span>
+      <button class="vinheta-btn" type="button" id="vinhetaBtn" aria-label="Assistir à vinheta Kaiky Concept. com som"><video src="video/intro-loop.mp4" muted loop playsinline autoplay preload="metadata"></video>▶ vinheta</button>
     </div>
     <div class="reveal">
       <span class="eyebrow">quem tá por trás</span>
@@ -669,7 +687,7 @@
   <nav>
     <a href="https://www.instagram.com/kaikyconcept/" target="_blank" rel="noopener">Instagram</a>
     <a href="https://www.behance.net/kaikyconcept" target="_blank" rel="noopener">Behance</a>
-    <a href="#topo">Topo ↑</a>
+    <a href="#topo" class="fogo-topo" id="fogoTopo" aria-label="Voltar ao topo"><span class="fogo-mini"><img class="dim" src="img/logo-fogo.png" alt=""><img class="lit" src="img/logo-fogo.png" alt=""></span><span>Topo ↑</span></a>
   </nav>
 </footer>
 
@@ -744,14 +762,48 @@
   const finish = () => { if (finished) return; finished = true; loader.classList.add('done'); root.classList.add('ready'); setTimeout(() => loader.classList.add('gone'), 1000); };
   if (reduce) { finished = true; loader.classList.add('gone'); root.classList.add('ready'); }
   else {
-    const t0 = performance.now(), DUR = 1600, count = $('#count'), logo = loader.querySelector('.loader-logo');
-    const tick = now => { if (finished) return; const p = Math.min(1,(now-t0)/DUR), e = 1-Math.pow(1-p,3);
-      count.textContent = String(Math.round(e*100)).padStart(3,'0'); logo.style.setProperty('--heat', e);
-      if (p < 1) requestAnimationFrame(tick); else setTimeout(finish, 250); };
+    /* o foguinho do logo pega fogo de baixo pra cima */
+    const cv = $('#fogoCv'), cx = cv.getContext('2d'), img = $('#fogoLogo');
+    const DUR = 1900;
+    let W, H, dpr = Math.min(2, devicePixelRatio || 1);
+    const size = () => { W = innerWidth; H = innerHeight; cv.width = W*dpr; cv.height = H*dpr; cx.setTransform(dpr,0,0,dpr,0,0); };
+    size(); addEventListener('resize', size);
+    let t0 = 0, fq = false;
+    const tick = now => {
+      if (loader.classList.contains('gone')) return;
+      if (!t0) t0 = now;
+      const p = Math.min(1,(now-t0)/DUR), e = p < .5 ? 2*p*p : 1-Math.pow(-2*p+2,2)/2;
+      cx.clearRect(0,0,W,H);
+      /* logo: apagado + parte acesa com borda em línguas de fogo */
+      if (img.complete && img.naturalWidth) {
+        const lw = Math.min(230, Math.max(140, W*.2)), lh = lw*img.naturalHeight/img.naturalWidth;
+        const lx = (W-lw)/2, ly = (H-lh)/2, t = now/1000, amp0 = lh*.14;
+        cx.globalAlpha = .22; cx.drawImage(img, lx, ly, lw, lh); cx.globalAlpha = 1;
+        const lvl = ly + lh + amp0 - e*(lh + amp0*2), amp = amp0*(1-e*.5);
+        cx.save(); cx.beginPath(); cx.moveTo(lx-10, ly+lh+10);
+        for (let x = 0; x <= lw+20; x += 4) {
+          const u = x/lw, tong = Math.abs(Math.sin(u*9 + t*7))*.6 + Math.abs(Math.sin(u*17 - t*11))*.4;
+          cx.lineTo(lx-10+x, lvl + amp*.35 - amp*tong);
+        }
+        cx.lineTo(lx+lw+10, ly+lh+10); cx.closePath(); cx.clip();
+        cx.drawImage(img, lx, ly, lw, lh); cx.restore();
+      }
+      if (p >= 1 && !fq) { fq = true; setTimeout(finish, 280); }
+      requestAnimationFrame(tick);
+    };
     requestAnimationFrame(tick);
     $('#skip').addEventListener('click', finish);
     setTimeout(finish, 3500);
   }
+
+
+  /* ---------- vinheta com som (Sobre) ---------- */
+  const vm = $('#vmodal'), vmv = $('#vmodalVid');
+  $('#vinhetaBtn').addEventListener('click', () => { vm.classList.add('on'); vmv.currentTime = 0; vmv.muted = false; vmv.play().catch(()=>{}); });
+  const fechaVm = () => { vm.classList.remove('on'); vmv.pause(); };
+  $('#vmodalX').addEventListener('click', fechaVm); vm.addEventListener('click', e => { if (e.target === vm) fechaVm(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && vm.classList.contains('on')) fechaVm(); });
+
 
   /* ---------- toast + copiar e-mail ---------- */
   const toast = $('#toast'); let toastT;
@@ -937,14 +989,22 @@
       contact.style.setProperty('--fx', ((e.clientX - r.left)/r.width - .5)*60+'px'); contact.style.setProperty('--fy', ((e.clientY - r.top)/r.height - .5)*60+'px'); });
   }
 
+  /* ---------- foguinho do rodapé enche com o scroll ---------- */
+  const fogoTopo = $('#fogoTopo');
+  const enche = () => { const max = document.documentElement.scrollHeight - innerHeight; fogoTopo.style.setProperty('--sp', max > 0 ? Math.min(1, scrollY / max) : 1); };
+  addEventListener('scroll', enche, {passive:true}); addEventListener('resize', enche); enche();
+
   /* ---------- serviços ---------- */
   const prev = $('#svcPreview'); let px = 0, py = 0, hovering = null;
-  prev.innerHTML = $$('.svc').map(s => `<img src="${s.dataset.img}" alt="" style="opacity:0">`).join('');
+  prev.innerHTML = $$('.svc').map(s => `<img src="${s.dataset.img}" alt="" style="opacity:0">`).join('') + '<video src="video/intro-loop.mp4" muted loop playsinline preload="none" style="opacity:0"></video>';
+  const pvid = prev.querySelector('video');
   const prevImgs = [...prev.children];
   $$('.svc').forEach((s,i) => {
     const side = e => { const r = s.getBoundingClientRect(); s.style.setProperty('--from', (e.clientY < r.top + r.height/2 ? '-101%' : '101%')); };
     s.addEventListener('mouseenter', e => { side(e); if (!fine || reduce) return; hovering = s;
-      prevImgs.forEach((im,j) => im.style.opacity = j===i ? 1 : 0); prev.style.setProperty('--rot', (i%2 ? 3 : -3)+'deg'); prev.classList.add('on'); });
+      const usaVid = i === 3;
+      prevImgs.forEach((im,j) => im.style.opacity = (j===i && !(usaVid && im === pvid)) ? 1 : 0);
+      if (usaVid) { prevImgs.forEach(im => im.style.opacity = 0); pvid.style.opacity = 1; pvid.play().catch(()=>{}); } else { pvid.style.opacity = 0; pvid.pause(); } prev.style.setProperty('--rot', (i%2 ? 3 : -3)+'deg'); prev.classList.add('on'); });
     s.addEventListener('mouseleave', e => { side(e); hovering = null; setTimeout(() => { if (!hovering) prev.classList.remove('on'); }, 30); });
   });
 

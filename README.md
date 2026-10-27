@@ -32,7 +32,9 @@ A primeira versão continua no GitHub da Giovana, em [projectcampos/kaiky-concep
 
 ## Interações
 
-- Tela de carregamento com o logo acendendo (pode ser pulada e nunca passa de 3,5 s)
+- Tela de carregamento em que o foguinho do logo pega fogo de baixo pra cima (pode ser pulada e nunca passa de 3,5 s)
+- Vinheta animada no "Sobre" (abre com som) e prévia em vídeo no hover de "Vídeo & motion"
+- Foguinho no rodapé que enche conforme a página rola e leva de volta ao topo
 - Título com "FOGO" pintado à mão por cima
 - Bolha de vidro que aparece sobre itens clicáveis, mantendo o cursor padrão do sistema
 - Cases com inclinação 3D e brilho que segue o mouse
@@ -48,6 +50,7 @@ index.html              página única (HTML, CSS e JavaScript juntos, sem depen
 img/                    capas dos cases, logo, foto, favicon e imagem de compartilhamento
 img/posters/            pôsteres da série CONCEPT FRAMES*
 img/video/              capa e cenas do documentário Ponto a Ponto
+video/                  vinheta Kaiky Concept. (mp4, webm, loop e capa)
 .nojekyll               avisa o GitHub Pages para servir os arquivos como estão
 ```
 
